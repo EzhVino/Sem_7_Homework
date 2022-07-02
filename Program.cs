@@ -1,6 +1,6 @@
-﻿// задать двумерный массив и по запросу координат пользователя 
-// сказать число или что его нет
-// *Решение для простых смертных, кто считает строки и столбцы начиная с еденицы:
+﻿// Задача 50: Напишите программу, которая на вход принимает позиции элемента в двумерном массиве, и возвращает значение этого элемента 
+// или же указание, что такого элемента нет
+// *3й метод PositionContent приспособлен для простых смертных пользователей, кто считает строки и столбцы начиная с еденицы:
 
 
 // int[,] CreateArray(int m, int n, int min, int max)
@@ -51,7 +51,7 @@
 // int userColumn = Convert.ToInt32(Console.ReadLine());
 // PositionContent(myArray, userRow, userColumn);
 
-// Задать массив и найти среднее арифметическое по заданной колонке
+// Задача 52: Задайте двумерный массив из целых чисел. Найдите среднее арифметическое элементов в каждом столбце.
 
 int[,] CreateArray(int m, int n, int min, int max)
 {
@@ -78,21 +78,26 @@ void ShowArray(int[,] array)
     }
 }
 
-int ColumnAverage (int [,] array, int column)
+void ColumnAverage(int[,] array)
 {
-    column--;
-    int sum = 0;
-    for (int i = 0; i < array.GetLength(0); i++)
+    for (int j = 0; j < array.GetLength(1); j++)
     {
-       sum = sum + array[i, column];
+        double sum = 0;
+        for (int i = 0; i < array.GetLength(0); i++)
+        {
+            sum += array[i, j];
+        }
+        double result = sum / array.GetLength(0);
+        Console.Write(result + " | ");
     }
-    int result = Convert.ToInt32(sum / array.GetLength(0));
-    return result;
 }
 
 
 int[,] myArray = CreateArray(4, 5, 1, 30);
 ShowArray(myArray);
-Console.WriteLine("Choose column number:");
-int userColumn = Convert.ToInt32(Console.ReadLine());
-Console.WriteLine($"Arithmetic mean in column {userColumn} is {ColumnAverage(myArray, userColumn)}");
+Console.WriteLine();
+ColumnAverage(myArray);
+
+//* Вопрос на семинар: как округлить result до десятых. Как добавить пробел после вывода отформатированного результата? 
+//* и почему не форматируется до десятых вот так - Console.Write("{0:f1}", result + " ");
+
